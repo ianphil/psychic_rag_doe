@@ -1,0 +1,10 @@
+query,retrieval_method,filtering,similarity_threshold,top_text,model_score,human_score,justification,is_gold
+What are best practices for prompt engineering?,vector,False,0.5," guide that demonstrates many techniques.
+- [Xavi Amatriain's Prompt Engineering 101 Introduction to Prompt Engineering](https://amatriain.net/blog/PromptEngineering) and [202 Advanced Prompt Engineering](https://amatriain.net/blog/prompt201): A basic but opinionated introduction to prompt engineering and a follow up collection with many advanced methods starting with CoT.
+
+## Video courses
+
+- [Andrew Ng's DeepLearning.AI](https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/): A short course on prompt engineering for developers.
+- [Andrej Karpathy's Let's build GPT](https://www.youtube.com/watch?v=kCc8FmEb1nY): A detailed dive into the machine learning underlying GPT.
+- [Prompt Engineering by DAIR.AI](https://www.youtube.com/watch?v=dOxUroR57xs): A one-hour video on various prompt engineering techniques.
+- [Scrimba course about Assistants API](https://scrimba.com/",0.6865853071212769,4,"Links to prompt engineering, not best practices",True
