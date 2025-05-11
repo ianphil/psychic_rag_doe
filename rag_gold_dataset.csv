@@ -1,10 +1,44 @@
 query,retrieval_method,filtering,similarity_threshold,top_text,model_score,human_score,justification,is_gold
-What are best practices for prompt engineering?,vector,False,0.5," guide that demonstrates many techniques.
-- [Xavi Amatriain's Prompt Engineering 101 Introduction to Prompt Engineering](https://amatriain.net/blog/PromptEngineering) and [202 Advanced Prompt Engineering](https://amatriain.net/blog/prompt201): A basic but opinionated introduction to prompt engineering and a follow up collection with many advanced methods starting with CoT.
+"How can OpenAI's Realtime API be used to build a multi-lingual, one-way translation workflow using WebSockets?",vector,False,0.5,"# Translation Demo
 
-## Video courses
+This project demonstrates how to use the [OpenAI Realtime API](https://platform.openai.com/docs/guides/realtime) to build a one-way translation application with WebSockets. It is implemented using the [Realtime + Websockets integration](https://platform.openai.com/docs/guides/realtime-websocket). A real-world use case for this demo is multilingual, conversational translation—where a speaker talks into the speaker app and listeners hear translations in their selected native languages via the listener app. Imagine a conference room with multiple participants with headphones, listening live to a speaker in their own languages. Due to the current turn-based nature of audio models, the speaker must pause briefly to allow the model to process and translate speech. However, as models become faster and more efficient, this latency will decrease significantly and the translation will become more seamless.
 
-- [Andrew Ng's DeepLearning.AI](https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/): A short course on prompt engineering for developers.
-- [Andrej Karpathy's Let's build GPT](https://www.youtube.com/watch?v=kCc8FmEb1nY): A detailed dive into the machine learning underlying GPT.
-- [Prompt Engineering by DAIR.AI](https://www.youtube.com/watch?v=dOxUroR57xs): A one-hour video on various prompt engineering techniques.
-- [Scrimba course about Assistants API](https://scrimba.com/",0.6865853071212769,4,"Links to prompt engineering, not best practices",True
+## How to Use
+
+### Running the Application
+
+1. **Set up the OpenAI API:**
+
+   - If you're new to the OpenAI API, [sign up for an account](https://platform.openai.com/signup).
+   - Follow the [Quickstart](https://platform.openai.com/docs/quickstart) to retrieve your API key.
+
+2. **Clone the Repository:**
+
+   ```bash
+   git clone <repository-url>
+   ```
+
+3. **Set your API key:**
+
+   - Create a `.env` file at the root of the project and add the following line:
+     ```bash
+     REACT_APP_OPENAI_API_KEY=<your_api_key>
+     ```
+
+4. **Install dependencies:**
+
+   Navigate to the project directory and run:
+
+   ```bash
+   npm install
+   ```
+
+5. **Run the Speaker & Listener Apps:**
+
+   ```bash
+   npm start
+   ```
+
+   The speaker and listener apps will be available at:
+   - [http://localhost:3000/speaker](http://localhost:3000/speaker)
+   - [http://localhost",0.7615945041179657,4,"found the demo section of doc, and keywords match",True

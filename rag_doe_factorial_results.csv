@@ -1,181 +1,1183 @@
 query,retrieval_method,filtering,similarity_threshold,top_text,model_score,human_score,justification
-How do I authenticate with Azure OpenAI?,vector,False,0.5,"   type: string
-                example: {example of response}
-```
+Can you provide an example of how to build an agent using the Node.js SDK that can determine a user's location and current weather to suggest activities?,vector,False,0.5,"js) for Solution 1 and [this file](https://github.com/openai/openai-cookbook/blob/main/examples/chatgpt/sharepoint_azure_function/solution_two_preprocessing.js) for Solution 2.  Save the function. 
 
-## Authentication Instructions
 
-Below are instructions on setting up authentication with this 3rd party application. Have questions? Check out [Getting Started Example](https://platform.openai.com/docs/actions/getting-started) to see how this step works in more detail.
+> **This code is meant to be directional** - while it should work out of the box, it is designed to be customized to your needs (see examples towards the end of this document).
 
+15. Set up the following env variables by going to the **Configuration** tab on the left under **Settings.** Note that this may be listed directly in **Environment Variables** depending on your Azure UI.
 
-### In Google Cloud Console
-In Google Cloud Console, you need to create OAuth client ID credentials. To navigate to the right page search for ""Credentials"" in Google Cloud Console or enter `https://console.cloud.google.com/apis/credentials?project=<your_project_id>` in your browser. You can read more about it [here](https://developers.google.com/workspace/guides/create-credentials).
+    1. `TENANT_ID`: copied from previous section
 
-Click on ""CREATE CREDENTIALS"" and select ""Oauth client ID"". Select ""Web Application"" for ""Application type"" and enter the name of your application (see below).
+    2. `CLIENT_ID`: copied from previous section
 
-![](../../../images/gcp-function-",0.6494086980819702,2,It found Auth instructions but not for Azure
-What's the example for streaming responses?,vector,False,0.5,"-evident, and are probably better than the jargon developed in base model days.
+    3. _Solution 2 only:_
 
-**Keep code examples general and exportable.** In code demonstrations, try to minimize dependencies. Don’t make users install extra libraries. Don’t make them have to refer back and forth between different pages or sections. Try to make examples simple and self-contained.
+       1. `OPENAI_API_KEY:` spin up an OpenAI API key on platform.openai.com.
 
-**Prioritize topics by value.** Documentation that covers common problems—e.g., how to count tokens—is magnitudes more valuable than documentation that covers rare problems—e.g., how to optimize an emoji database. Prioritize accordingly.
+16. Go to the **Console** tab under the **Development Tools**
 
-**Don’t teach bad habits.** If API keys should not be stored in code, never share an example that stores an API key in code.
+    1. Install the following packages in console
 
-**Introduce topics with a broad opening.** For example, if explaining how to program a good recommender, consider opening by briefly mentioning that recommendations are widespread across the web, from YouTube videos to Amazon items to Wikipedia. Grounding a narrow topic with a broad opening can help people feel more secure before jumping into uncertain territory. And if the text is well-written, those who already know it may still enjoy it",0.5178613066673279,1,I don't see any relevance
-How can I implement chain of thought reasoning?,vector,False,0.5," Results
+       1. `npm install @microsoft/microsoft-graph-client`
 
-Testing on grade school math problems, the authors found that chain of thought prompting tripled the solve rate, from 18% to 57%.
+       2. `npm install axios`
 
-[![chain of thought example](/images/chain_of_thought_fig5.png)
-<br>Source: _Chain of Thought Prompting Elicits Reasoning in Large Language Models_ Jason Wei and Denny Zhou et al. (2022)](https://ai.googleblog.com/2022/05/language-models-perform-reasoning-via.html)
+       3. _Solution 2 only:_
 
-In addition to math problems, chain of thought prompting also lifted performance on questions related to sports understanding, coin flip tracking, and last letter concatenation. In most cases, not many examples were need to saturate the performance gains (less than 8 or so).
+          1. `npm install pdf-parse`
 
-[![chain of thought example](/images/chain_of_thought_fig11.png)
-<br>Source: _Chain of Thought Prompting Elicits Reasoning in Large Language Models_ Jason Wei and Denny Zhou et al. (2022)](https://ai.googleblog.com/2022/05/language-models-",0.6972372531890869,2,"Example chain of thought, nothing about how"
-What are best practices for prompt engineering?,vector,False,0.5," guide that demonstrates many techniques.
-- [Xavi Amatriain's Prompt Engineering 101 Introduction to Prompt Engineering](https://amatriain.net/blog/PromptEngineering) and [202 Advanced Prompt Engineering](https://amatriain.net/blog/prompt201): A basic but opinionated introduction to prompt engineering and a follow up collection with many advanced methods starting with CoT.
+          2. `npm install openai`
 
-## Video courses
+17. Once this is complete, try calling the function (POST call) from Postman again, putting the below into body (using a query and search term you think will generate responses).
 
-- [Andrew Ng's DeepLearning.AI](https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/): A short course on prompt engineering for developers.
-- [Andrej Karpathy's Let's build GPT](https://www.youtube.com/watch?v=kCc8FmEb1nY): A detailed dive into the machine learning underlying GPT.
-- [Prompt Engineering by DAIR.AI](https://www.youtube.com/watch?v=dOxUroR57xs): A one-hour video on various prompt engineering techniques.
-- [Scrimba course about Assistants API](https://scrimba.com/",0.6865853071212769,4,"Links to prompt engineering, not best practices"
-How do I authenticate with Azure OpenAI?,vector,True,0.5,"Client ID:** `CLIENT_ID` from step 7 above
+     *Solution 1*:
+     ```json
+    {
+        ""searchTerm"": ""<choose a search term>""
+    }
+    ```
+    *Solution 2*: 
+    ```json
+    {
+        ""query"": ""<choose a question>"",
+        ""searchTerm"": ""<choose a",0.5509605407714844,1,"nothing about node, location, weather"
+What steps are involved in setting up a Supabase Vector database to store and query OpenAI embeddings for semantic search?,vector,False,0.5,"# Supabase Vector Database
 
-    5. **Client secret:** `MICROSOFT_PROVIDER_AUTHENTICATION_SECRET `from step 11 above
+[Supabase](https://supabase.com/docs) is an open-source Firebase alternative built on top of [Postgres](https://en.wikipedia.org/wiki/PostgreSQL), a production-grade SQL database.
 
-    6. **Scope**: `SCOPE` from step 5 above
+[Supabase Vector](https://supabase.com/docs/guides/ai) is a vector toolkit built on [pgvector](https://github.com/pgvector/pgvector), a Postgres extension that allows you to store your embeddings inside the same database that holds the rest of your application data. When combined with pgvector's indexing algorithms, vector search remains [fast at large scales](https://supabase.com/blog/increase-performance-pgvector-hnsw).
 
-    7. **Client credentials**: Send client credentials in body
+Supabase adds an ecosystem of services and tools on top of Postgres that makes app development as quick as possible, including:
 
-13. You will need to click **Get New Access Token**, and then hit the endpoint you saved in step 10 above. If it was successful, you should get this response: `”This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.”`
+- [Auto-generated REST APIs](https://supabase.com/docs/guides/api)
+- [Auto-generated GraphQL APIs](https://supabase.com/docs/guides/graphql)
+- [Realtime APIs](https://supabase.com/docs/guides/realtime)
+- [Authentication](https://supabase.com/docs/guides/auth)
+- [File storage](https://supabase.com/docs/guides/storage)
+- [Edge functions](https://supabase.com/docs/guides/functions)
 
+We can use these services alongside pgvector to store and query embeddings within Postgres.
 
-##### Part 5: Add in Function Code
+## OpenAI Cookbook Examples
 
-Now that you have an authenticated Azure Function, we can update the function to search SharePoint / O365
+Below are guides and resources that walk you through how to use OpenAI embedding models with Supabase Vector.
 
+| Guide                                    | Description                                                |
+| ---------------------------------------- | ---------------------------------------------------------- |
+| [Semantic search](./semantic-search.mdx) | Store, index, and query embedd",0.7640353143215179,3,found the right section
+"How do you create a SQL table in Supabase that is suitable for storing vector embeddings, and what data type is used for the embeddings?",vector,False,0.5,"# Supabase Vector Database
 
-14. Go to your test function and paste in the code from [this file](https://github.com/openai/openai-cookbook/blob/main/examples/chatgpt/sharepoint_azure_function/solution_one_file_retrieval.",0.6195634305477142,3,"Relevant section to providing msft auth secret, not sure it's for azure openai"
-What's the example for streaming responses?,vector,True,0.5,"-evident, and are probably better than the jargon developed in base model days.
+[Supabase](https://supabase.com/docs) is an open-source Firebase alternative built on top of [Postgres](https://en.wikipedia.org/wiki/PostgreSQL), a production-grade SQL database.
 
-**Keep code examples general and exportable.** In code demonstrations, try to minimize dependencies. Don’t make users install extra libraries. Don’t make them have to refer back and forth between different pages or sections. Try to make examples simple and self-contained.
+[Supabase Vector](https://supabase.com/docs/guides/ai) is a vector toolkit built on [pgvector](https://github.com/pgvector/pgvector), a Postgres extension that allows you to store your embeddings inside the same database that holds the rest of your application data. When combined with pgvector's indexing algorithms, vector search remains [fast at large scales](https://supabase.com/blog/increase-performance-pgvector-hnsw).
 
-**Prioritize topics by value.** Documentation that covers common problems—e.g., how to count tokens—is magnitudes more valuable than documentation that covers rare problems—e.g., how to optimize an emoji database. Prioritize accordingly.
+Supabase adds an ecosystem of services and tools on top of Postgres that makes app development as quick as possible, including:
 
-**Don’t teach bad habits.** If API keys should not be stored in code, never share an example that stores an API key in code.
+- [Auto-generated REST APIs](https://supabase.com/docs/guides/api)
+- [Auto-generated GraphQL APIs](https://supabase.com/docs/guides/graphql)
+- [Realtime APIs](https://supabase.com/docs/guides/realtime)
+- [Authentication](https://supabase.com/docs/guides/auth)
+- [File storage](https://supabase.com/docs/guides/storage)
+- [Edge functions](https://supabase.com/docs/guides/functions)
 
-**Introduce topics with a broad opening.** For example, if explaining how to program a good recommender, consider opening by briefly mentioning that recommendations are widespread across the web, from YouTube videos to Amazon items to Wikipedia. Grounding a narrow topic with a broad opening can help people feel more secure before jumping into uncertain territory. And if the text is well-written, those who already know it may still enjoy it",0.5178613066673279,1,I see nothing about streaming
-How can I implement chain of thought reasoning?,vector,True,0.5," Results
+We can use these services alongside pgvector to store and query embeddings within Postgres.
 
-Testing on grade school math problems, the authors found that chain of thought prompting tripled the solve rate, from 18% to 57%.
+## OpenAI Cookbook Examples
 
-[![chain of thought example](/images/chain_of_thought_fig5.png)
-<br>Source: _Chain of Thought Prompting Elicits Reasoning in Large Language Models_ Jason Wei and Denny Zhou et al. (2022)](https://ai.googleblog.com/2022/05/language-models-perform-reasoning-via.html)
+Below are guides and resources that walk you through how to use OpenAI embedding models with Supabase Vector.
 
-In addition to math problems, chain of thought prompting also lifted performance on questions related to sports understanding, coin flip tracking, and last letter concatenation. In most cases, not many examples were need to saturate the performance gains (less than 8 or so).
+| Guide                                    | Description                                                |
+| ---------------------------------------- | ---------------------------------------------------------- |
+| [Semantic search](./semantic-search.mdx) | Store, index, and query embedd",0.7192462682723999,2,section about sup abase but not on context
+What is the process for generating OpenAI embeddings using their JavaScript client and storing them in a Supabase SQL table?,vector,False,0.5,"# Supabase Vector Database
 
-[![chain of thought example](/images/chain_of_thought_fig11.png)
-<br>Source: _Chain of Thought Prompting Elicits Reasoning in Large Language Models_ Jason Wei and Denny Zhou et al. (2022)](https://ai.googleblog.com/2022/05/language-models-",0.697179526090622,2,Chain of thought is mentioned but I see nothing about how
-What are best practices for prompt engineering?,vector,True,0.5," guide that demonstrates many techniques.
-- [Xavi Amatriain's Prompt Engineering 101 Introduction to Prompt Engineering](https://amatriain.net/blog/PromptEngineering) and [202 Advanced Prompt Engineering](https://amatriain.net/blog/prompt201): A basic but opinionated introduction to prompt engineering and a follow up collection with many advanced methods starting with CoT.
+[Supabase](https://supabase.com/docs) is an open-source Firebase alternative built on top of [Postgres](https://en.wikipedia.org/wiki/PostgreSQL), a production-grade SQL database.
 
-## Video courses
+[Supabase Vector](https://supabase.com/docs/guides/ai) is a vector toolkit built on [pgvector](https://github.com/pgvector/pgvector), a Postgres extension that allows you to store your embeddings inside the same database that holds the rest of your application data. When combined with pgvector's indexing algorithms, vector search remains [fast at large scales](https://supabase.com/blog/increase-performance-pgvector-hnsw).
 
-- [Andrew Ng's DeepLearning.AI](https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/): A short course on prompt engineering for developers.
-- [Andrej Karpathy's Let's build GPT](https://www.youtube.com/watch?v=kCc8FmEb1nY): A detailed dive into the machine learning underlying GPT.
-- [Prompt Engineering by DAIR.AI](https://www.youtube.com/watch?v=dOxUroR57xs): A one-hour video on various prompt engineering techniques.
-- [Scrimba course about Assistants API](https://scrimba.com/",0.6865853071212769,3,links provided but not best practices
-How do I authenticate with Azure OpenAI?,hybrid,False,0.5,"   type: string
-                example: {example of response}
-```
+Supabase adds an ecosystem of services and tools on top of Postgres that makes app development as quick as possible, including:
 
-## Authentication Instructions
+- [Auto-generated REST APIs](https://supabase.com/docs/guides/api)
+- [Auto-generated GraphQL APIs](https://supabase.com/docs/guides/graphql)
+- [Realtime APIs](https://supabase.com/docs/guides/realtime)
+- [Authentication](https://supabase.com/docs/guides/auth)
+- [File storage](https://supabase.com/docs/guides/storage)
+- [Edge functions](https://supabase.com/docs/guides/functions)
 
-Below are instructions on setting up authentication with this 3rd party application. Have questions? Check out [Getting Started Example](https://platform.openai.com/docs/actions/getting-started) to see how this step works in more detail.
+We can use these services alongside pgvector to store and query embeddings within Postgres.
 
+## OpenAI Cookbook Examples
 
-### In Google Cloud Console
-In Google Cloud Console, you need to create OAuth client ID credentials. To navigate to the right page search for ""Credentials"" in Google Cloud Console or enter `https://console.cloud.google.com/apis/credentials?project=<your_project_id>` in your browser. You can read more about it [here](https://developers.google.com/workspace/guides/create-credentials).
+Below are guides and resources that walk you through how to use OpenAI embedding models with Supabase Vector.
 
-Click on ""CREATE CREDENTIALS"" and select ""Oauth client ID"". Select ""Web Application"" for ""Application type"" and enter the name of your application (see below).
+| Guide                                    | Description                                                |
+| ---------------------------------------- | ---------------------------------------------------------- |
+| [Semantic search](./semantic-search.mdx) | Store, index, and query embedd",0.648980975151062,2,found section on sup abase but not contxt
+How can semantic search be performed over embeddings stored in Supabase Vector using a Postgres function and the Supabase JavaScript client?,vector,False,0.5,"# Supabase Vector Database
 
-![](../../../images/gcp-function-",0.6494086980819702,2,auth but not azure
-What's the example for streaming responses?,hybrid,False,0.5,"-evident, and are probably better than the jargon developed in base model days.
+[Supabase](https://supabase.com/docs) is an open-source Firebase alternative built on top of [Postgres](https://en.wikipedia.org/wiki/PostgreSQL), a production-grade SQL database.
 
-**Keep code examples general and exportable.** In code demonstrations, try to minimize dependencies. Don’t make users install extra libraries. Don’t make them have to refer back and forth between different pages or sections. Try to make examples simple and self-contained.
+[Supabase Vector](https://supabase.com/docs/guides/ai) is a vector toolkit built on [pgvector](https://github.com/pgvector/pgvector), a Postgres extension that allows you to store your embeddings inside the same database that holds the rest of your application data. When combined with pgvector's indexing algorithms, vector search remains [fast at large scales](https://supabase.com/blog/increase-performance-pgvector-hnsw).
 
-**Prioritize topics by value.** Documentation that covers common problems—e.g., how to count tokens—is magnitudes more valuable than documentation that covers rare problems—e.g., how to optimize an emoji database. Prioritize accordingly.
+Supabase adds an ecosystem of services and tools on top of Postgres that makes app development as quick as possible, including:
 
-**Don’t teach bad habits.** If API keys should not be stored in code, never share an example that stores an API key in code.
+- [Auto-generated REST APIs](https://supabase.com/docs/guides/api)
+- [Auto-generated GraphQL APIs](https://supabase.com/docs/guides/graphql)
+- [Realtime APIs](https://supabase.com/docs/guides/realtime)
+- [Authentication](https://supabase.com/docs/guides/auth)
+- [File storage](https://supabase.com/docs/guides/storage)
+- [Edge functions](https://supabase.com/docs/guides/functions)
 
-**Introduce topics with a broad opening.** For example, if explaining how to program a good recommender, consider opening by briefly mentioning that recommendations are widespread across the web, from YouTube videos to Amazon items to Wikipedia. Grounding a narrow topic with a broad opening can help people feel more secure before jumping into uncertain territory. And if the text is well-written, those who already know it may still enjoy it",0.5178613066673279,1,nothing about streaming
-How can I implement chain of thought reasoning?,hybrid,False,0.5," Results
+We can use these services alongside pgvector to store and query embeddings within Postgres.
 
-Testing on grade school math problems, the authors found that chain of thought prompting tripled the solve rate, from 18% to 57%.
+## OpenAI Cookbook Examples
 
-[![chain of thought example](/images/chain_of_thought_fig5.png)
-<br>Source: _Chain of Thought Prompting Elicits Reasoning in Large Language Models_ Jason Wei and Denny Zhou et al. (2022)](https://ai.googleblog.com/2022/05/language-models-perform-reasoning-via.html)
+Below are guides and resources that walk you through how to use OpenAI embedding models with Supabase Vector.
 
-In addition to math problems, chain of thought prompting also lifted performance on questions related to sports understanding, coin flip tracking, and last letter concatenation. In most cases, not many examples were need to saturate the performance gains (less than 8 or so).
+| Guide                                    | Description                                                |
+| ---------------------------------------- | ---------------------------------------------------------- |
+| [Semantic search](./semantic-search.mdx) | Store, index, and query embedd",0.6897248029708862,2,section on supabase but not contextual
+"How can OpenAI's Realtime API be used to build a multi-lingual, one-way translation workflow using WebSockets?",vector,False,0.5,"# Translation Demo
 
-[![chain of thought example](/images/chain_of_thought_fig11.png)
-<br>Source: _Chain of Thought Prompting Elicits Reasoning in Large Language Models_ Jason Wei and Denny Zhou et al. (2022)](https://ai.googleblog.com/2022/05/language-models-",0.6972372531890869,2,chain of thought mentioned but nothing about how
-What are best practices for prompt engineering?,hybrid,False,0.5," guide that demonstrates many techniques.
-- [Xavi Amatriain's Prompt Engineering 101 Introduction to Prompt Engineering](https://amatriain.net/blog/PromptEngineering) and [202 Advanced Prompt Engineering](https://amatriain.net/blog/prompt201): A basic but opinionated introduction to prompt engineering and a follow up collection with many advanced methods starting with CoT.
+This project demonstrates how to use the [OpenAI Realtime API](https://platform.openai.com/docs/guides/realtime) to build a one-way translation application with WebSockets. It is implemented using the [Realtime + Websockets integration](https://platform.openai.com/docs/guides/realtime-websocket). A real-world use case for this demo is multilingual, conversational translation—where a speaker talks into the speaker app and listeners hear translations in their selected native languages via the listener app. Imagine a conference room with multiple participants with headphones, listening live to a speaker in their own languages. Due to the current turn-based nature of audio models, the speaker must pause briefly to allow the model to process and translate speech. However, as models become faster and more efficient, this latency will decrease significantly and the translation will become more seamless.
 
-## Video courses
+## How to Use
 
-- [Andrew Ng's DeepLearning.AI](https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/): A short course on prompt engineering for developers.
-- [Andrej Karpathy's Let's build GPT](https://www.youtube.com/watch?v=kCc8FmEb1nY): A detailed dive into the machine learning underlying GPT.
-- [Prompt Engineering by DAIR.AI](https://www.youtube.com/watch?v=dOxUroR57xs): A one-hour video on various prompt engineering techniques.
-- [Scrimba course about Assistants API](https://scrimba.com/",0.6865853071212769,3,links for prompt engineering but nothing about best practices
-How do I authenticate with Azure OpenAI?,hybrid,True,0.5,"Client ID:** `CLIENT_ID` from step 7 above
+### Running the Application
 
-    5. **Client secret:** `MICROSOFT_PROVIDER_AUTHENTICATION_SECRET `from step 11 above
+1. **Set up the OpenAI API:**
 
-    6. **Scope**: `SCOPE` from step 5 above
+   - If you're new to the OpenAI API, [sign up for an account](https://platform.openai.com/signup).
+   - Follow the [Quickstart](https://platform.openai.com/docs/quickstart) to retrieve your API key.
 
-    7. **Client credentials**: Send client credentials in body
+2. **Clone the Repository:**
 
-13. You will need to click **Get New Access Token**, and then hit the endpoint you saved in step 10 above. If it was successful, you should get this response: `”This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.”`
+   ```bash
+   git clone <repository-url>
+   ```
 
+3. **Set your API key:**
 
-##### Part 5: Add in Function Code
+   - Create a `.env` file at the root of the project and add the following line:
+     ```bash
+     REACT_APP_OPENAI_API_KEY=<your_api_key>
+     ```
 
-Now that you have an authenticated Azure Function, we can update the function to search SharePoint / O365
+4. **Install dependencies:**
 
+   Navigate to the project directory and run:
 
-14. Go to your test function and paste in the code from [this file](https://github.com/openai/openai-cookbook/blob/main/examples/chatgpt/sharepoint_azure_function/solution_one_file_retrieval.",0.6195634305477142,3,Auth to MSFT but nothing about azure
-What's the example for streaming responses?,hybrid,True,0.5,"-evident, and are probably better than the jargon developed in base model days.
+   ```bash
+   npm install
+   ```
 
-**Keep code examples general and exportable.** In code demonstrations, try to minimize dependencies. Don’t make users install extra libraries. Don’t make them have to refer back and forth between different pages or sections. Try to make examples simple and self-contained.
+5. **Run the Speaker & Listener Apps:**
 
-**Prioritize topics by value.** Documentation that covers common problems—e.g., how to count tokens—is magnitudes more valuable than documentation that covers rare problems—e.g., how to optimize an emoji database. Prioritize accordingly.
+   ```bash
+   npm start
+   ```
 
-**Don’t teach bad habits.** If API keys should not be stored in code, never share an example that stores an API key in code.
+   The speaker and listener apps will be available at:
+   - [http://localhost:3000/speaker](http://localhost:3000/speaker)
+   - [http://localhost",0.7615945041179657,4,"found the demo section of doc, and keywords match"
+"What is the high-level architecture of an application that uses the Realtime API for conversational translation, involving a speaker app and a listener app?",vector,False,0.5,"# Translation Demo
 
-**Introduce topics with a broad opening.** For example, if explaining how to program a good recommender, consider opening by briefly mentioning that recommendations are widespread across the web, from YouTube videos to Amazon items to Wikipedia. Grounding a narrow topic with a broad opening can help people feel more secure before jumping into uncertain territory. And if the text is well-written, those who already know it may still enjoy it",0.5178613066673279,1,nothing about streaming
-How can I implement chain of thought reasoning?,hybrid,True,0.5," Results
+This project demonstrates how to use the [OpenAI Realtime API](https://platform.openai.com/docs/guides/realtime) to build a one-way translation application with WebSockets. It is implemented using the [Realtime + Websockets integration](https://platform.openai.com/docs/guides/realtime-websocket). A real-world use case for this demo is multilingual, conversational translation—where a speaker talks into the speaker app and listeners hear translations in their selected native languages via the listener app. Imagine a conference room with multiple participants with headphones, listening live to a speaker in their own languages. Due to the current turn-based nature of audio models, the speaker must pause briefly to allow the model to process and translate speech. However, as models become faster and more efficient, this latency will decrease significantly and the translation will become more seamless.
 
-Testing on grade school math problems, the authors found that chain of thought prompting tripled the solve rate, from 18% to 57%.
+## How to Use
 
-[![chain of thought example](/images/chain_of_thought_fig5.png)
-<br>Source: _Chain of Thought Prompting Elicits Reasoning in Large Language Models_ Jason Wei and Denny Zhou et al. (2022)](https://ai.googleblog.com/2022/05/language-models-perform-reasoning-via.html)
+### Running the Application
 
-In addition to math problems, chain of thought prompting also lifted performance on questions related to sports understanding, coin flip tracking, and last letter concatenation. In most cases, not many examples were need to saturate the performance gains (less than 8 or so).
+1. **Set up the OpenAI API:**
 
-[![chain of thought example](/images/chain_of_thought_fig11.png)
-<br>Source: _Chain of Thought Prompting Elicits Reasoning in Large Language Models_ Jason Wei and Denny Zhou et al. (2022)](https://ai.googleblog.com/2022/05/language-models-",0.6972372531890869,3,about chain of thought but not how
-What are best practices for prompt engineering?,hybrid,True,0.5," guide that demonstrates many techniques.
-- [Xavi Amatriain's Prompt Engineering 101 Introduction to Prompt Engineering](https://amatriain.net/blog/PromptEngineering) and [202 Advanced Prompt Engineering](https://amatriain.net/blog/prompt201): A basic but opinionated introduction to prompt engineering and a follow up collection with many advanced methods starting with CoT.
+   - If you're new to the OpenAI API, [sign up for an account](https://platform.openai.com/signup).
+   - Follow the [Quickstart](https://platform.openai.com/docs/quickstart) to retrieve your API key.
 
-## Video courses
+2. **Clone the Repository:**
 
-- [Andrew Ng's DeepLearning.AI](https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/): A short course on prompt engineering for developers.
-- [Andrej Karpathy's Let's build GPT](https://www.youtube.com/watch?v=kCc8FmEb1nY): A detailed dive into the machine learning underlying GPT.
-- [Prompt Engineering by DAIR.AI](https://www.youtube.com/watch?v=dOxUroR57xs): A one-hour video on various prompt engineering techniques.
-- [Scrimba course about Assistants API](https://scrimba.com/",0.6865853071212769,3,links for prompt engineering but not best practices
+   ```bash
+   git clone <repository-url>
+   ```
+
+3. **Set your API key:**
+
+   - Create a `.env` file at the root of the project and add the following line:
+     ```bash
+     REACT_APP_OPENAI_API_KEY=<your_api_key>
+     ```
+
+4. **Install dependencies:**
+
+   Navigate to the project directory and run:
+
+   ```bash
+   npm install
+   ```
+
+5. **Run the Speaker & Listener Apps:**
+
+   ```bash
+   npm start
+   ```
+
+   The speaker and listener apps will be available at:
+   - [http://localhost:3000/speaker](http://localhost:3000/speaker)
+   - [http://localhost",0.6839597523212433,2,Might be the right document but I see nothing about architecture
+How are language-specific prompts and sessions managed when using the Realtime API for translating speech into multiple languages simultaneously?,vector,False,0.5,"# Translation Demo
+
+This project demonstrates how to use the [OpenAI Realtime API](https://platform.openai.com/docs/guides/realtime) to build a one-way translation application with WebSockets. It is implemented using the [Realtime + Websockets integration](https://platform.openai.com/docs/guides/realtime-websocket). A real-world use case for this demo is multilingual, conversational translation—where a speaker talks into the speaker app and listeners hear translations in their selected native languages via the listener app. Imagine a conference room with multiple participants with headphones, listening live to a speaker in their own languages. Due to the current turn-based nature of audio models, the speaker must pause briefly to allow the model to process and translate speech. However, as models become faster and more efficient, this latency will decrease significantly and the translation will become more seamless.
+
+## How to Use
+
+### Running the Application
+
+1. **Set up the OpenAI API:**
+
+   - If you're new to the OpenAI API, [sign up for an account](https://platform.openai.com/signup).
+   - Follow the [Quickstart](https://platform.openai.com/docs/quickstart) to retrieve your API key.
+
+2. **Clone the Repository:**
+
+   ```bash
+   git clone <repository-url>
+   ```
+
+3. **Set your API key:**
+
+   - Create a `.env` file at the root of the project and add the following line:
+     ```bash
+     REACT_APP_OPENAI_API_KEY=<your_api_key>
+     ```
+
+4. **Install dependencies:**
+
+   Navigate to the project directory and run:
+
+   ```bash
+   npm install
+   ```
+
+5. **Run the Speaker & Listener Apps:**
+
+   ```bash
+   npm start
+   ```
+
+   The speaker and listener apps will be available at:
+   - [http://localhost:3000/speaker](http://localhost:3000/speaker)
+   - [http://localhost",0.6086937189102173,2,correct document doesn't answer question
+What steps are involved in setting up a Supabase Vector database to store and query OpenAI embeddings for semantic search?,vector,False,0.75,"# Supabase Vector Database
+
+[Supabase](https://supabase.com/docs) is an open-source Firebase alternative built on top of [Postgres](https://en.wikipedia.org/wiki/PostgreSQL), a production-grade SQL database.
+
+[Supabase Vector](https://supabase.com/docs/guides/ai) is a vector toolkit built on [pgvector](https://github.com/pgvector/pgvector), a Postgres extension that allows you to store your embeddings inside the same database that holds the rest of your application data. When combined with pgvector's indexing algorithms, vector search remains [fast at large scales](https://supabase.com/blog/increase-performance-pgvector-hnsw).
+
+Supabase adds an ecosystem of services and tools on top of Postgres that makes app development as quick as possible, including:
+
+- [Auto-generated REST APIs](https://supabase.com/docs/guides/api)
+- [Auto-generated GraphQL APIs](https://supabase.com/docs/guides/graphql)
+- [Realtime APIs](https://supabase.com/docs/guides/realtime)
+- [Authentication](https://supabase.com/docs/guides/auth)
+- [File storage](https://supabase.com/docs/guides/storage)
+- [Edge functions](https://supabase.com/docs/guides/functions)
+
+We can use these services alongside pgvector to store and query embeddings within Postgres.
+
+## OpenAI Cookbook Examples
+
+Below are guides and resources that walk you through how to use OpenAI embedding models with Supabase Vector.
+
+| Guide                                    | Description                                                |
+| ---------------------------------------- | ---------------------------------------------------------- |
+| [Semantic search](./semantic-search.mdx) | Store, index, and query embedd",0.7640353143215179,2,2
+"How can OpenAI's Realtime API be used to build a multi-lingual, one-way translation workflow using WebSockets?",vector,False,0.75,"# Translation Demo
+
+This project demonstrates how to use the [OpenAI Realtime API](https://platform.openai.com/docs/guides/realtime) to build a one-way translation application with WebSockets. It is implemented using the [Realtime + Websockets integration](https://platform.openai.com/docs/guides/realtime-websocket). A real-world use case for this demo is multilingual, conversational translation—where a speaker talks into the speaker app and listeners hear translations in their selected native languages via the listener app. Imagine a conference room with multiple participants with headphones, listening live to a speaker in their own languages. Due to the current turn-based nature of audio models, the speaker must pause briefly to allow the model to process and translate speech. However, as models become faster and more efficient, this latency will decrease significantly and the translation will become more seamless.
+
+## How to Use
+
+### Running the Application
+
+1. **Set up the OpenAI API:**
+
+   - If you're new to the OpenAI API, [sign up for an account](https://platform.openai.com/signup).
+   - Follow the [Quickstart](https://platform.openai.com/docs/quickstart) to retrieve your API key.
+
+2. **Clone the Repository:**
+
+   ```bash
+   git clone <repository-url>
+   ```
+
+3. **Set your API key:**
+
+   - Create a `.env` file at the root of the project and add the following line:
+     ```bash
+     REACT_APP_OPENAI_API_KEY=<your_api_key>
+     ```
+
+4. **Install dependencies:**
+
+   Navigate to the project directory and run:
+
+   ```bash
+   npm install
+   ```
+
+5. **Run the Speaker & Listener Apps:**
+
+   ```bash
+   npm start
+   ```
+
+   The speaker and listener apps will be available at:
+   - [http://localhost:3000/speaker](http://localhost:3000/speaker)
+   - [http://localhost",0.7615945041179657,2,2
+Can you provide an example of how to build an agent using the Node.js SDK that can determine a user's location and current weather to suggest activities?,vector,True,0.5,"js) for Solution 1 and [this file](https://github.com/openai/openai-cookbook/blob/main/examples/chatgpt/sharepoint_azure_function/solution_two_preprocessing.js) for Solution 2.  Save the function. 
+
+
+> **This code is meant to be directional** - while it should work out of the box, it is designed to be customized to your needs (see examples towards the end of this document).
+
+15. Set up the following env variables by going to the **Configuration** tab on the left under **Settings.** Note that this may be listed directly in **Environment Variables** depending on your Azure UI.
+
+    1. `TENANT_ID`: copied from previous section
+
+    2. `CLIENT_ID`: copied from previous section
+
+    3. _Solution 2 only:_
+
+       1. `OPENAI_API_KEY:` spin up an OpenAI API key on platform.openai.com.
+
+16. Go to the **Console** tab under the **Development Tools**
+
+    1. Install the following packages in console
+
+       1. `npm install @microsoft/microsoft-graph-client`
+
+       2. `npm install axios`
+
+       3. _Solution 2 only:_
+
+          1. `npm install pdf-parse`
+
+          2. `npm install openai`
+
+17. Once this is complete, try calling the function (POST call) from Postman again, putting the below into body (using a query and search term you think will generate responses).
+
+     *Solution 1*:
+     ```json
+    {
+        ""searchTerm"": ""<choose a search term>""
+    }
+    ```
+    *Solution 2*: 
+    ```json
+    {
+        ""query"": ""<choose a question>"",
+        ""searchTerm"": ""<choose a",0.5509605407714844,1,1
+What steps are involved in setting up a Supabase Vector database to store and query OpenAI embeddings for semantic search?,vector,True,0.5,"# Supabase Vector Database
+
+[Supabase](https://supabase.com/docs) is an open-source Firebase alternative built on top of [Postgres](https://en.wikipedia.org/wiki/PostgreSQL), a production-grade SQL database.
+
+[Supabase Vector](https://supabase.com/docs/guides/ai) is a vector toolkit built on [pgvector](https://github.com/pgvector/pgvector), a Postgres extension that allows you to store your embeddings inside the same database that holds the rest of your application data. When combined with pgvector's indexing algorithms, vector search remains [fast at large scales](https://supabase.com/blog/increase-performance-pgvector-hnsw).
+
+Supabase adds an ecosystem of services and tools on top of Postgres that makes app development as quick as possible, including:
+
+- [Auto-generated REST APIs](https://supabase.com/docs/guides/api)
+- [Auto-generated GraphQL APIs](https://supabase.com/docs/guides/graphql)
+- [Realtime APIs](https://supabase.com/docs/guides/realtime)
+- [Authentication](https://supabase.com/docs/guides/auth)
+- [File storage](https://supabase.com/docs/guides/storage)
+- [Edge functions](https://supabase.com/docs/guides/functions)
+
+We can use these services alongside pgvector to store and query embeddings within Postgres.
+
+## OpenAI Cookbook Examples
+
+Below are guides and resources that walk you through how to use OpenAI embedding models with Supabase Vector.
+
+| Guide                                    | Description                                                |
+| ---------------------------------------- | ---------------------------------------------------------- |
+| [Semantic search](./semantic-search.mdx) | Store, index, and query embedd",0.7640353143215179,2,2
+"How do you create a SQL table in Supabase that is suitable for storing vector embeddings, and what data type is used for the embeddings?",vector,True,0.5,"# Supabase Vector Database
+
+[Supabase](https://supabase.com/docs) is an open-source Firebase alternative built on top of [Postgres](https://en.wikipedia.org/wiki/PostgreSQL), a production-grade SQL database.
+
+[Supabase Vector](https://supabase.com/docs/guides/ai) is a vector toolkit built on [pgvector](https://github.com/pgvector/pgvector), a Postgres extension that allows you to store your embeddings inside the same database that holds the rest of your application data. When combined with pgvector's indexing algorithms, vector search remains [fast at large scales](https://supabase.com/blog/increase-performance-pgvector-hnsw).
+
+Supabase adds an ecosystem of services and tools on top of Postgres that makes app development as quick as possible, including:
+
+- [Auto-generated REST APIs](https://supabase.com/docs/guides/api)
+- [Auto-generated GraphQL APIs](https://supabase.com/docs/guides/graphql)
+- [Realtime APIs](https://supabase.com/docs/guides/realtime)
+- [Authentication](https://supabase.com/docs/guides/auth)
+- [File storage](https://supabase.com/docs/guides/storage)
+- [Edge functions](https://supabase.com/docs/guides/functions)
+
+We can use these services alongside pgvector to store and query embeddings within Postgres.
+
+## OpenAI Cookbook Examples
+
+Below are guides and resources that walk you through how to use OpenAI embedding models with Supabase Vector.
+
+| Guide                                    | Description                                                |
+| ---------------------------------------- | ---------------------------------------------------------- |
+| [Semantic search](./semantic-search.mdx) | Store, index, and query embedd",0.7192462682723999,2,2
+What is the process for generating OpenAI embeddings using their JavaScript client and storing them in a Supabase SQL table?,vector,True,0.5,"# Supabase Vector Database
+
+[Supabase](https://supabase.com/docs) is an open-source Firebase alternative built on top of [Postgres](https://en.wikipedia.org/wiki/PostgreSQL), a production-grade SQL database.
+
+[Supabase Vector](https://supabase.com/docs/guides/ai) is a vector toolkit built on [pgvector](https://github.com/pgvector/pgvector), a Postgres extension that allows you to store your embeddings inside the same database that holds the rest of your application data. When combined with pgvector's indexing algorithms, vector search remains [fast at large scales](https://supabase.com/blog/increase-performance-pgvector-hnsw).
+
+Supabase adds an ecosystem of services and tools on top of Postgres that makes app development as quick as possible, including:
+
+- [Auto-generated REST APIs](https://supabase.com/docs/guides/api)
+- [Auto-generated GraphQL APIs](https://supabase.com/docs/guides/graphql)
+- [Realtime APIs](https://supabase.com/docs/guides/realtime)
+- [Authentication](https://supabase.com/docs/guides/auth)
+- [File storage](https://supabase.com/docs/guides/storage)
+- [Edge functions](https://supabase.com/docs/guides/functions)
+
+We can use these services alongside pgvector to store and query embeddings within Postgres.
+
+## OpenAI Cookbook Examples
+
+Below are guides and resources that walk you through how to use OpenAI embedding models with Supabase Vector.
+
+| Guide                                    | Description                                                |
+| ---------------------------------------- | ---------------------------------------------------------- |
+| [Semantic search](./semantic-search.mdx) | Store, index, and query embedd",0.648980975151062,2,2
+How can semantic search be performed over embeddings stored in Supabase Vector using a Postgres function and the Supabase JavaScript client?,vector,True,0.5,"# Supabase Vector Database
+
+[Supabase](https://supabase.com/docs) is an open-source Firebase alternative built on top of [Postgres](https://en.wikipedia.org/wiki/PostgreSQL), a production-grade SQL database.
+
+[Supabase Vector](https://supabase.com/docs/guides/ai) is a vector toolkit built on [pgvector](https://github.com/pgvector/pgvector), a Postgres extension that allows you to store your embeddings inside the same database that holds the rest of your application data. When combined with pgvector's indexing algorithms, vector search remains [fast at large scales](https://supabase.com/blog/increase-performance-pgvector-hnsw).
+
+Supabase adds an ecosystem of services and tools on top of Postgres that makes app development as quick as possible, including:
+
+- [Auto-generated REST APIs](https://supabase.com/docs/guides/api)
+- [Auto-generated GraphQL APIs](https://supabase.com/docs/guides/graphql)
+- [Realtime APIs](https://supabase.com/docs/guides/realtime)
+- [Authentication](https://supabase.com/docs/guides/auth)
+- [File storage](https://supabase.com/docs/guides/storage)
+- [Edge functions](https://supabase.com/docs/guides/functions)
+
+We can use these services alongside pgvector to store and query embeddings within Postgres.
+
+## OpenAI Cookbook Examples
+
+Below are guides and resources that walk you through how to use OpenAI embedding models with Supabase Vector.
+
+| Guide                                    | Description                                                |
+| ---------------------------------------- | ---------------------------------------------------------- |
+| [Semantic search](./semantic-search.mdx) | Store, index, and query embedd",0.6897248029708862,2,2
+"How can OpenAI's Realtime API be used to build a multi-lingual, one-way translation workflow using WebSockets?",vector,True,0.5,"# How to work with large language models
+
+## How large language models work
+
+[Large language models][Large language models Blog Post] are functions that map text to text. Given an input string of text, a large language model predicts the text that should come next.
+
+The magic of large language models is that by being trained to minimize this prediction error over vast quantities of text, the models end up learning concepts useful for these predictions. For example, they learn:
+
+- how to spell
+- how grammar works
+- how to paraphrase
+- how to answer questions
+- how to hold a conversation
+- how to write in many languages
+- how to code
+- etc.
+
+They do this by “reading” a large amount of existing text and learning how words tend to appear in context with other words, and uses what it has learned to predict the next most likely word that might appear in response to a user request, and each subsequent word after that.
+
+GPT-3 and GPT-4 power [many software products][OpenAI Customer Stories], including productivity apps, education apps, games, and more.
+
+## How to control a large language model
+
+Of all the inputs to a large language model, by far the most influential is the text prompt.
+
+Large language models can be prompted to produce output in a few ways:
+
+- **Instruction**: Tell the model what you want
+- **Completion**: Induce the model to complete the beginning of what you want
+- **Scenario**: Give the model a situation to play out
+- **Demonstration**: Show the model what you want, with either:
+  - A few examples in the prompt
+  - Many hundreds or thousands of examples in a fine-tuning training dataset
+
+An example of each is shown below.
+
+### Instruction prompts
+
+Write your instruction at the top of the prompt (or at the bottom, or both), and the model will do its best to follow the instruction and then stop. Instructions can be detailed, so don't be afraid to write a paragraph explicitly detailing the output you want, just stay aware of how many [tokens](https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them) the model can process.
+",0.5599063038825989,2,2
+"What is the high-level architecture of an application that uses the Realtime API for conversational translation, involving a speaker app and a listener app?",vector,True,0.5,"M apps with data.
+- [LLMOps Database](https://www.reddit.com/r/LocalLLaMA/comments/1h4u7au/a_nobs_database_of_how_companies_actually_deploy/): Database of how companies actually deploy LLMs in production.
+- [LMQL](https://lmql.ai): A programming language for LLM interaction with support for typed prompting, control flow, constraints, and tools.
+- [OpenAI Evals](https://github.com/openai/evals): An open-source library for evaluating task performance of language models and prompts.
+- [Outlines](https://github.com/normal-computing/outlines): A Python library that provides a domain-specific language to simplify prompting and constrain generation.
+- [Parea AI](https://www.parea.ai): A platform for debugging, testing, and monitoring LLM apps.
+- [Portkey](https://portkey.ai/): A platform for observability, model management, evals, and security for LLM apps.
+- [Promptify](https://github.com/promptslab/Promptify): A small Python library for using language models to perform NLP tasks.
+- [PromptPerfect](https://promptperfect.jina.ai/prompts): A paid product for testing and improving prompts.
+- [Prompttools](https://github.com/hegelai/prompttools): Open-source Python tools for testing and evaluating models, vector DBs, and prompts.
+- [Scale Spellbook](https://scale.com/spellbook): A paid product for building, comparing, and shipping language model apps.
+- [Semantic Kernel](https://github.com/microsoft/semantic-kernel): A Python/C#/Java library from Microsoft that supports prompt templating, function chaining, vectorized memory, and intelligent planning.
+- [Vellum](https://www.vellum.ai/): A paid AI product development platform to experiment with, evaluate, and deploy advanced LLM apps.
+- [Weights & Biases](https://wandb.ai/site/solutions/llmops): A paid product for tracking model training and prompt engineering experiments.
+- [",0.536563515663147,1,1
+How are language-specific prompts and sessions managed when using the Realtime API for translating speech into multiple languages simultaneously?,vector,True,0.5,"# How to work with large language models
+
+## How large language models work
+
+[Large language models][Large language models Blog Post] are functions that map text to text. Given an input string of text, a large language model predicts the text that should come next.
+
+The magic of large language models is that by being trained to minimize this prediction error over vast quantities of text, the models end up learning concepts useful for these predictions. For example, they learn:
+
+- how to spell
+- how grammar works
+- how to paraphrase
+- how to answer questions
+- how to hold a conversation
+- how to write in many languages
+- how to code
+- etc.
+
+They do this by “reading” a large amount of existing text and learning how words tend to appear in context with other words, and uses what it has learned to predict the next most likely word that might appear in response to a user request, and each subsequent word after that.
+
+GPT-3 and GPT-4 power [many software products][OpenAI Customer Stories], including productivity apps, education apps, games, and more.
+
+## How to control a large language model
+
+Of all the inputs to a large language model, by far the most influential is the text prompt.
+
+Large language models can be prompted to produce output in a few ways:
+
+- **Instruction**: Tell the model what you want
+- **Completion**: Induce the model to complete the beginning of what you want
+- **Scenario**: Give the model a situation to play out
+- **Demonstration**: Show the model what you want, with either:
+  - A few examples in the prompt
+  - Many hundreds or thousands of examples in a fine-tuning training dataset
+
+An example of each is shown below.
+
+### Instruction prompts
+
+Write your instruction at the top of the prompt (or at the bottom, or both), and the model will do its best to follow the instruction and then stop. Instructions can be detailed, so don't be afraid to write a paragraph explicitly detailing the output you want, just stay aware of how many [tokens](https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them) the model can process.
+",0.5945252180099487,1,1
+What steps are involved in setting up a Supabase Vector database to store and query OpenAI embeddings for semantic search?,vector,True,0.75,"# Supabase Vector Database
+
+[Supabase](https://supabase.com/docs) is an open-source Firebase alternative built on top of [Postgres](https://en.wikipedia.org/wiki/PostgreSQL), a production-grade SQL database.
+
+[Supabase Vector](https://supabase.com/docs/guides/ai) is a vector toolkit built on [pgvector](https://github.com/pgvector/pgvector), a Postgres extension that allows you to store your embeddings inside the same database that holds the rest of your application data. When combined with pgvector's indexing algorithms, vector search remains [fast at large scales](https://supabase.com/blog/increase-performance-pgvector-hnsw).
+
+Supabase adds an ecosystem of services and tools on top of Postgres that makes app development as quick as possible, including:
+
+- [Auto-generated REST APIs](https://supabase.com/docs/guides/api)
+- [Auto-generated GraphQL APIs](https://supabase.com/docs/guides/graphql)
+- [Realtime APIs](https://supabase.com/docs/guides/realtime)
+- [Authentication](https://supabase.com/docs/guides/auth)
+- [File storage](https://supabase.com/docs/guides/storage)
+- [Edge functions](https://supabase.com/docs/guides/functions)
+
+We can use these services alongside pgvector to store and query embeddings within Postgres.
+
+## OpenAI Cookbook Examples
+
+Below are guides and resources that walk you through how to use OpenAI embedding models with Supabase Vector.
+
+| Guide                                    | Description                                                |
+| ---------------------------------------- | ---------------------------------------------------------- |
+| [Semantic search](./semantic-search.mdx) | Store, index, and query embedd",0.7640353143215179,2,2
+Can you provide an example of how to build an agent using the Node.js SDK that can determine a user's location and current weather to suggest activities?,hybrid,False,0.5,"js) for Solution 1 and [this file](https://github.com/openai/openai-cookbook/blob/main/examples/chatgpt/sharepoint_azure_function/solution_two_preprocessing.js) for Solution 2.  Save the function. 
+
+
+> **This code is meant to be directional** - while it should work out of the box, it is designed to be customized to your needs (see examples towards the end of this document).
+
+15. Set up the following env variables by going to the **Configuration** tab on the left under **Settings.** Note that this may be listed directly in **Environment Variables** depending on your Azure UI.
+
+    1. `TENANT_ID`: copied from previous section
+
+    2. `CLIENT_ID`: copied from previous section
+
+    3. _Solution 2 only:_
+
+       1. `OPENAI_API_KEY:` spin up an OpenAI API key on platform.openai.com.
+
+16. Go to the **Console** tab under the **Development Tools**
+
+    1. Install the following packages in console
+
+       1. `npm install @microsoft/microsoft-graph-client`
+
+       2. `npm install axios`
+
+       3. _Solution 2 only:_
+
+          1. `npm install pdf-parse`
+
+          2. `npm install openai`
+
+17. Once this is complete, try calling the function (POST call) from Postman again, putting the below into body (using a query and search term you think will generate responses).
+
+     *Solution 1*:
+     ```json
+    {
+        ""searchTerm"": ""<choose a search term>""
+    }
+    ```
+    *Solution 2*: 
+    ```json
+    {
+        ""query"": ""<choose a question>"",
+        ""searchTerm"": ""<choose a",0.5509605407714844,1,1
+What steps are involved in setting up a Supabase Vector database to store and query OpenAI embeddings for semantic search?,hybrid,False,0.5,"# Supabase Vector Database
+
+[Supabase](https://supabase.com/docs) is an open-source Firebase alternative built on top of [Postgres](https://en.wikipedia.org/wiki/PostgreSQL), a production-grade SQL database.
+
+[Supabase Vector](https://supabase.com/docs/guides/ai) is a vector toolkit built on [pgvector](https://github.com/pgvector/pgvector), a Postgres extension that allows you to store your embeddings inside the same database that holds the rest of your application data. When combined with pgvector's indexing algorithms, vector search remains [fast at large scales](https://supabase.com/blog/increase-performance-pgvector-hnsw).
+
+Supabase adds an ecosystem of services and tools on top of Postgres that makes app development as quick as possible, including:
+
+- [Auto-generated REST APIs](https://supabase.com/docs/guides/api)
+- [Auto-generated GraphQL APIs](https://supabase.com/docs/guides/graphql)
+- [Realtime APIs](https://supabase.com/docs/guides/realtime)
+- [Authentication](https://supabase.com/docs/guides/auth)
+- [File storage](https://supabase.com/docs/guides/storage)
+- [Edge functions](https://supabase.com/docs/guides/functions)
+
+We can use these services alongside pgvector to store and query embeddings within Postgres.
+
+## OpenAI Cookbook Examples
+
+Below are guides and resources that walk you through how to use OpenAI embedding models with Supabase Vector.
+
+| Guide                                    | Description                                                |
+| ---------------------------------------- | ---------------------------------------------------------- |
+| [Semantic search](./semantic-search.mdx) | Store, index, and query embedd",0.7640353143215179,2,2
+"How do you create a SQL table in Supabase that is suitable for storing vector embeddings, and what data type is used for the embeddings?",hybrid,False,0.5,"# Supabase Vector Database
+
+[Supabase](https://supabase.com/docs) is an open-source Firebase alternative built on top of [Postgres](https://en.wikipedia.org/wiki/PostgreSQL), a production-grade SQL database.
+
+[Supabase Vector](https://supabase.com/docs/guides/ai) is a vector toolkit built on [pgvector](https://github.com/pgvector/pgvector), a Postgres extension that allows you to store your embeddings inside the same database that holds the rest of your application data. When combined with pgvector's indexing algorithms, vector search remains [fast at large scales](https://supabase.com/blog/increase-performance-pgvector-hnsw).
+
+Supabase adds an ecosystem of services and tools on top of Postgres that makes app development as quick as possible, including:
+
+- [Auto-generated REST APIs](https://supabase.com/docs/guides/api)
+- [Auto-generated GraphQL APIs](https://supabase.com/docs/guides/graphql)
+- [Realtime APIs](https://supabase.com/docs/guides/realtime)
+- [Authentication](https://supabase.com/docs/guides/auth)
+- [File storage](https://supabase.com/docs/guides/storage)
+- [Edge functions](https://supabase.com/docs/guides/functions)
+
+We can use these services alongside pgvector to store and query embeddings within Postgres.
+
+## OpenAI Cookbook Examples
+
+Below are guides and resources that walk you through how to use OpenAI embedding models with Supabase Vector.
+
+| Guide                                    | Description                                                |
+| ---------------------------------------- | ---------------------------------------------------------- |
+| [Semantic search](./semantic-search.mdx) | Store, index, and query embedd",0.7192462682723999,2,2
+What is the process for generating OpenAI embeddings using their JavaScript client and storing them in a Supabase SQL table?,hybrid,False,0.5,"# Supabase Vector Database
+
+[Supabase](https://supabase.com/docs) is an open-source Firebase alternative built on top of [Postgres](https://en.wikipedia.org/wiki/PostgreSQL), a production-grade SQL database.
+
+[Supabase Vector](https://supabase.com/docs/guides/ai) is a vector toolkit built on [pgvector](https://github.com/pgvector/pgvector), a Postgres extension that allows you to store your embeddings inside the same database that holds the rest of your application data. When combined with pgvector's indexing algorithms, vector search remains [fast at large scales](https://supabase.com/blog/increase-performance-pgvector-hnsw).
+
+Supabase adds an ecosystem of services and tools on top of Postgres that makes app development as quick as possible, including:
+
+- [Auto-generated REST APIs](https://supabase.com/docs/guides/api)
+- [Auto-generated GraphQL APIs](https://supabase.com/docs/guides/graphql)
+- [Realtime APIs](https://supabase.com/docs/guides/realtime)
+- [Authentication](https://supabase.com/docs/guides/auth)
+- [File storage](https://supabase.com/docs/guides/storage)
+- [Edge functions](https://supabase.com/docs/guides/functions)
+
+We can use these services alongside pgvector to store and query embeddings within Postgres.
+
+## OpenAI Cookbook Examples
+
+Below are guides and resources that walk you through how to use OpenAI embedding models with Supabase Vector.
+
+| Guide                                    | Description                                                |
+| ---------------------------------------- | ---------------------------------------------------------- |
+| [Semantic search](./semantic-search.mdx) | Store, index, and query embedd",0.648980975151062,2,2
+How can semantic search be performed over embeddings stored in Supabase Vector using a Postgres function and the Supabase JavaScript client?,hybrid,False,0.5,"# Supabase Vector Database
+
+[Supabase](https://supabase.com/docs) is an open-source Firebase alternative built on top of [Postgres](https://en.wikipedia.org/wiki/PostgreSQL), a production-grade SQL database.
+
+[Supabase Vector](https://supabase.com/docs/guides/ai) is a vector toolkit built on [pgvector](https://github.com/pgvector/pgvector), a Postgres extension that allows you to store your embeddings inside the same database that holds the rest of your application data. When combined with pgvector's indexing algorithms, vector search remains [fast at large scales](https://supabase.com/blog/increase-performance-pgvector-hnsw).
+
+Supabase adds an ecosystem of services and tools on top of Postgres that makes app development as quick as possible, including:
+
+- [Auto-generated REST APIs](https://supabase.com/docs/guides/api)
+- [Auto-generated GraphQL APIs](https://supabase.com/docs/guides/graphql)
+- [Realtime APIs](https://supabase.com/docs/guides/realtime)
+- [Authentication](https://supabase.com/docs/guides/auth)
+- [File storage](https://supabase.com/docs/guides/storage)
+- [Edge functions](https://supabase.com/docs/guides/functions)
+
+We can use these services alongside pgvector to store and query embeddings within Postgres.
+
+## OpenAI Cookbook Examples
+
+Below are guides and resources that walk you through how to use OpenAI embedding models with Supabase Vector.
+
+| Guide                                    | Description                                                |
+| ---------------------------------------- | ---------------------------------------------------------- |
+| [Semantic search](./semantic-search.mdx) | Store, index, and query embedd",0.6897248029708862,2,2
+"How can OpenAI's Realtime API be used to build a multi-lingual, one-way translation workflow using WebSockets?",hybrid,False,0.5,"# Translation Demo
+
+This project demonstrates how to use the [OpenAI Realtime API](https://platform.openai.com/docs/guides/realtime) to build a one-way translation application with WebSockets. It is implemented using the [Realtime + Websockets integration](https://platform.openai.com/docs/guides/realtime-websocket). A real-world use case for this demo is multilingual, conversational translation—where a speaker talks into the speaker app and listeners hear translations in their selected native languages via the listener app. Imagine a conference room with multiple participants with headphones, listening live to a speaker in their own languages. Due to the current turn-based nature of audio models, the speaker must pause briefly to allow the model to process and translate speech. However, as models become faster and more efficient, this latency will decrease significantly and the translation will become more seamless.
+
+## How to Use
+
+### Running the Application
+
+1. **Set up the OpenAI API:**
+
+   - If you're new to the OpenAI API, [sign up for an account](https://platform.openai.com/signup).
+   - Follow the [Quickstart](https://platform.openai.com/docs/quickstart) to retrieve your API key.
+
+2. **Clone the Repository:**
+
+   ```bash
+   git clone <repository-url>
+   ```
+
+3. **Set your API key:**
+
+   - Create a `.env` file at the root of the project and add the following line:
+     ```bash
+     REACT_APP_OPENAI_API_KEY=<your_api_key>
+     ```
+
+4. **Install dependencies:**
+
+   Navigate to the project directory and run:
+
+   ```bash
+   npm install
+   ```
+
+5. **Run the Speaker & Listener Apps:**
+
+   ```bash
+   npm start
+   ```
+
+   The speaker and listener apps will be available at:
+   - [http://localhost:3000/speaker](http://localhost:3000/speaker)
+   - [http://localhost",0.7615945041179657,2,2
+"What is the high-level architecture of an application that uses the Realtime API for conversational translation, involving a speaker app and a listener app?",hybrid,False,0.5,"# Translation Demo
+
+This project demonstrates how to use the [OpenAI Realtime API](https://platform.openai.com/docs/guides/realtime) to build a one-way translation application with WebSockets. It is implemented using the [Realtime + Websockets integration](https://platform.openai.com/docs/guides/realtime-websocket). A real-world use case for this demo is multilingual, conversational translation—where a speaker talks into the speaker app and listeners hear translations in their selected native languages via the listener app. Imagine a conference room with multiple participants with headphones, listening live to a speaker in their own languages. Due to the current turn-based nature of audio models, the speaker must pause briefly to allow the model to process and translate speech. However, as models become faster and more efficient, this latency will decrease significantly and the translation will become more seamless.
+
+## How to Use
+
+### Running the Application
+
+1. **Set up the OpenAI API:**
+
+   - If you're new to the OpenAI API, [sign up for an account](https://platform.openai.com/signup).
+   - Follow the [Quickstart](https://platform.openai.com/docs/quickstart) to retrieve your API key.
+
+2. **Clone the Repository:**
+
+   ```bash
+   git clone <repository-url>
+   ```
+
+3. **Set your API key:**
+
+   - Create a `.env` file at the root of the project and add the following line:
+     ```bash
+     REACT_APP_OPENAI_API_KEY=<your_api_key>
+     ```
+
+4. **Install dependencies:**
+
+   Navigate to the project directory and run:
+
+   ```bash
+   npm install
+   ```
+
+5. **Run the Speaker & Listener Apps:**
+
+   ```bash
+   npm start
+   ```
+
+   The speaker and listener apps will be available at:
+   - [http://localhost:3000/speaker](http://localhost:3000/speaker)
+   - [http://localhost",0.6839597523212433,2,2
+How are language-specific prompts and sessions managed when using the Realtime API for translating speech into multiple languages simultaneously?,hybrid,False,0.5,"# Translation Demo
+
+This project demonstrates how to use the [OpenAI Realtime API](https://platform.openai.com/docs/guides/realtime) to build a one-way translation application with WebSockets. It is implemented using the [Realtime + Websockets integration](https://platform.openai.com/docs/guides/realtime-websocket). A real-world use case for this demo is multilingual, conversational translation—where a speaker talks into the speaker app and listeners hear translations in their selected native languages via the listener app. Imagine a conference room with multiple participants with headphones, listening live to a speaker in their own languages. Due to the current turn-based nature of audio models, the speaker must pause briefly to allow the model to process and translate speech. However, as models become faster and more efficient, this latency will decrease significantly and the translation will become more seamless.
+
+## How to Use
+
+### Running the Application
+
+1. **Set up the OpenAI API:**
+
+   - If you're new to the OpenAI API, [sign up for an account](https://platform.openai.com/signup).
+   - Follow the [Quickstart](https://platform.openai.com/docs/quickstart) to retrieve your API key.
+
+2. **Clone the Repository:**
+
+   ```bash
+   git clone <repository-url>
+   ```
+
+3. **Set your API key:**
+
+   - Create a `.env` file at the root of the project and add the following line:
+     ```bash
+     REACT_APP_OPENAI_API_KEY=<your_api_key>
+     ```
+
+4. **Install dependencies:**
+
+   Navigate to the project directory and run:
+
+   ```bash
+   npm install
+   ```
+
+5. **Run the Speaker & Listener Apps:**
+
+   ```bash
+   npm start
+   ```
+
+   The speaker and listener apps will be available at:
+   - [http://localhost:3000/speaker](http://localhost:3000/speaker)
+   - [http://localhost",0.6086937189102173,2,2
+What steps are involved in setting up a Supabase Vector database to store and query OpenAI embeddings for semantic search?,hybrid,False,0.75,"# Supabase Vector Database
+
+[Supabase](https://supabase.com/docs) is an open-source Firebase alternative built on top of [Postgres](https://en.wikipedia.org/wiki/PostgreSQL), a production-grade SQL database.
+
+[Supabase Vector](https://supabase.com/docs/guides/ai) is a vector toolkit built on [pgvector](https://github.com/pgvector/pgvector), a Postgres extension that allows you to store your embeddings inside the same database that holds the rest of your application data. When combined with pgvector's indexing algorithms, vector search remains [fast at large scales](https://supabase.com/blog/increase-performance-pgvector-hnsw).
+
+Supabase adds an ecosystem of services and tools on top of Postgres that makes app development as quick as possible, including:
+
+- [Auto-generated REST APIs](https://supabase.com/docs/guides/api)
+- [Auto-generated GraphQL APIs](https://supabase.com/docs/guides/graphql)
+- [Realtime APIs](https://supabase.com/docs/guides/realtime)
+- [Authentication](https://supabase.com/docs/guides/auth)
+- [File storage](https://supabase.com/docs/guides/storage)
+- [Edge functions](https://supabase.com/docs/guides/functions)
+
+We can use these services alongside pgvector to store and query embeddings within Postgres.
+
+## OpenAI Cookbook Examples
+
+Below are guides and resources that walk you through how to use OpenAI embedding models with Supabase Vector.
+
+| Guide                                    | Description                                                |
+| ---------------------------------------- | ---------------------------------------------------------- |
+| [Semantic search](./semantic-search.mdx) | Store, index, and query embedd",0.7640353143215179,2,2
+"How can OpenAI's Realtime API be used to build a multi-lingual, one-way translation workflow using WebSockets?",hybrid,False,0.75,"# Translation Demo
+
+This project demonstrates how to use the [OpenAI Realtime API](https://platform.openai.com/docs/guides/realtime) to build a one-way translation application with WebSockets. It is implemented using the [Realtime + Websockets integration](https://platform.openai.com/docs/guides/realtime-websocket). A real-world use case for this demo is multilingual, conversational translation—where a speaker talks into the speaker app and listeners hear translations in their selected native languages via the listener app. Imagine a conference room with multiple participants with headphones, listening live to a speaker in their own languages. Due to the current turn-based nature of audio models, the speaker must pause briefly to allow the model to process and translate speech. However, as models become faster and more efficient, this latency will decrease significantly and the translation will become more seamless.
+
+## How to Use
+
+### Running the Application
+
+1. **Set up the OpenAI API:**
+
+   - If you're new to the OpenAI API, [sign up for an account](https://platform.openai.com/signup).
+   - Follow the [Quickstart](https://platform.openai.com/docs/quickstart) to retrieve your API key.
+
+2. **Clone the Repository:**
+
+   ```bash
+   git clone <repository-url>
+   ```
+
+3. **Set your API key:**
+
+   - Create a `.env` file at the root of the project and add the following line:
+     ```bash
+     REACT_APP_OPENAI_API_KEY=<your_api_key>
+     ```
+
+4. **Install dependencies:**
+
+   Navigate to the project directory and run:
+
+   ```bash
+   npm install
+   ```
+
+5. **Run the Speaker & Listener Apps:**
+
+   ```bash
+   npm start
+   ```
+
+   The speaker and listener apps will be available at:
+   - [http://localhost:3000/speaker](http://localhost:3000/speaker)
+   - [http://localhost",0.7615945041179657,2,2
+Can you provide an example of how to build an agent using the Node.js SDK that can determine a user's location and current weather to suggest activities?,hybrid,True,0.5,"js) for Solution 1 and [this file](https://github.com/openai/openai-cookbook/blob/main/examples/chatgpt/sharepoint_azure_function/solution_two_preprocessing.js) for Solution 2.  Save the function. 
+
+
+> **This code is meant to be directional** - while it should work out of the box, it is designed to be customized to your needs (see examples towards the end of this document).
+
+15. Set up the following env variables by going to the **Configuration** tab on the left under **Settings.** Note that this may be listed directly in **Environment Variables** depending on your Azure UI.
+
+    1. `TENANT_ID`: copied from previous section
+
+    2. `CLIENT_ID`: copied from previous section
+
+    3. _Solution 2 only:_
+
+       1. `OPENAI_API_KEY:` spin up an OpenAI API key on platform.openai.com.
+
+16. Go to the **Console** tab under the **Development Tools**
+
+    1. Install the following packages in console
+
+       1. `npm install @microsoft/microsoft-graph-client`
+
+       2. `npm install axios`
+
+       3. _Solution 2 only:_
+
+          1. `npm install pdf-parse`
+
+          2. `npm install openai`
+
+17. Once this is complete, try calling the function (POST call) from Postman again, putting the below into body (using a query and search term you think will generate responses).
+
+     *Solution 1*:
+     ```json
+    {
+        ""searchTerm"": ""<choose a search term>""
+    }
+    ```
+    *Solution 2*: 
+    ```json
+    {
+        ""query"": ""<choose a question>"",
+        ""searchTerm"": ""<choose a",0.5509605407714844,1,1
+What steps are involved in setting up a Supabase Vector database to store and query OpenAI embeddings for semantic search?,hybrid,True,0.5,"# Supabase Vector Database
+
+[Supabase](https://supabase.com/docs) is an open-source Firebase alternative built on top of [Postgres](https://en.wikipedia.org/wiki/PostgreSQL), a production-grade SQL database.
+
+[Supabase Vector](https://supabase.com/docs/guides/ai) is a vector toolkit built on [pgvector](https://github.com/pgvector/pgvector), a Postgres extension that allows you to store your embeddings inside the same database that holds the rest of your application data. When combined with pgvector's indexing algorithms, vector search remains [fast at large scales](https://supabase.com/blog/increase-performance-pgvector-hnsw).
+
+Supabase adds an ecosystem of services and tools on top of Postgres that makes app development as quick as possible, including:
+
+- [Auto-generated REST APIs](https://supabase.com/docs/guides/api)
+- [Auto-generated GraphQL APIs](https://supabase.com/docs/guides/graphql)
+- [Realtime APIs](https://supabase.com/docs/guides/realtime)
+- [Authentication](https://supabase.com/docs/guides/auth)
+- [File storage](https://supabase.com/docs/guides/storage)
+- [Edge functions](https://supabase.com/docs/guides/functions)
+
+We can use these services alongside pgvector to store and query embeddings within Postgres.
+
+## OpenAI Cookbook Examples
+
+Below are guides and resources that walk you through how to use OpenAI embedding models with Supabase Vector.
+
+| Guide                                    | Description                                                |
+| ---------------------------------------- | ---------------------------------------------------------- |
+| [Semantic search](./semantic-search.mdx) | Store, index, and query embedd",0.7640353143215179,1,1
+"How do you create a SQL table in Supabase that is suitable for storing vector embeddings, and what data type is used for the embeddings?",hybrid,True,0.5,"# Supabase Vector Database
+
+[Supabase](https://supabase.com/docs) is an open-source Firebase alternative built on top of [Postgres](https://en.wikipedia.org/wiki/PostgreSQL), a production-grade SQL database.
+
+[Supabase Vector](https://supabase.com/docs/guides/ai) is a vector toolkit built on [pgvector](https://github.com/pgvector/pgvector), a Postgres extension that allows you to store your embeddings inside the same database that holds the rest of your application data. When combined with pgvector's indexing algorithms, vector search remains [fast at large scales](https://supabase.com/blog/increase-performance-pgvector-hnsw).
+
+Supabase adds an ecosystem of services and tools on top of Postgres that makes app development as quick as possible, including:
+
+- [Auto-generated REST APIs](https://supabase.com/docs/guides/api)
+- [Auto-generated GraphQL APIs](https://supabase.com/docs/guides/graphql)
+- [Realtime APIs](https://supabase.com/docs/guides/realtime)
+- [Authentication](https://supabase.com/docs/guides/auth)
+- [File storage](https://supabase.com/docs/guides/storage)
+- [Edge functions](https://supabase.com/docs/guides/functions)
+
+We can use these services alongside pgvector to store and query embeddings within Postgres.
+
+## OpenAI Cookbook Examples
+
+Below are guides and resources that walk you through how to use OpenAI embedding models with Supabase Vector.
+
+| Guide                                    | Description                                                |
+| ---------------------------------------- | ---------------------------------------------------------- |
+| [Semantic search](./semantic-search.mdx) | Store, index, and query embedd",0.7192462682723999,2,2
+What is the process for generating OpenAI embeddings using their JavaScript client and storing them in a Supabase SQL table?,hybrid,True,0.5,"# Supabase Vector Database
+
+[Supabase](https://supabase.com/docs) is an open-source Firebase alternative built on top of [Postgres](https://en.wikipedia.org/wiki/PostgreSQL), a production-grade SQL database.
+
+[Supabase Vector](https://supabase.com/docs/guides/ai) is a vector toolkit built on [pgvector](https://github.com/pgvector/pgvector), a Postgres extension that allows you to store your embeddings inside the same database that holds the rest of your application data. When combined with pgvector's indexing algorithms, vector search remains [fast at large scales](https://supabase.com/blog/increase-performance-pgvector-hnsw).
+
+Supabase adds an ecosystem of services and tools on top of Postgres that makes app development as quick as possible, including:
+
+- [Auto-generated REST APIs](https://supabase.com/docs/guides/api)
+- [Auto-generated GraphQL APIs](https://supabase.com/docs/guides/graphql)
+- [Realtime APIs](https://supabase.com/docs/guides/realtime)
+- [Authentication](https://supabase.com/docs/guides/auth)
+- [File storage](https://supabase.com/docs/guides/storage)
+- [Edge functions](https://supabase.com/docs/guides/functions)
+
+We can use these services alongside pgvector to store and query embeddings within Postgres.
+
+## OpenAI Cookbook Examples
+
+Below are guides and resources that walk you through how to use OpenAI embedding models with Supabase Vector.
+
+| Guide                                    | Description                                                |
+| ---------------------------------------- | ---------------------------------------------------------- |
+| [Semantic search](./semantic-search.mdx) | Store, index, and query embedd",0.648980975151062,2,2
+How can semantic search be performed over embeddings stored in Supabase Vector using a Postgres function and the Supabase JavaScript client?,hybrid,True,0.5,"# Supabase Vector Database
+
+[Supabase](https://supabase.com/docs) is an open-source Firebase alternative built on top of [Postgres](https://en.wikipedia.org/wiki/PostgreSQL), a production-grade SQL database.
+
+[Supabase Vector](https://supabase.com/docs/guides/ai) is a vector toolkit built on [pgvector](https://github.com/pgvector/pgvector), a Postgres extension that allows you to store your embeddings inside the same database that holds the rest of your application data. When combined with pgvector's indexing algorithms, vector search remains [fast at large scales](https://supabase.com/blog/increase-performance-pgvector-hnsw).
+
+Supabase adds an ecosystem of services and tools on top of Postgres that makes app development as quick as possible, including:
+
+- [Auto-generated REST APIs](https://supabase.com/docs/guides/api)
+- [Auto-generated GraphQL APIs](https://supabase.com/docs/guides/graphql)
+- [Realtime APIs](https://supabase.com/docs/guides/realtime)
+- [Authentication](https://supabase.com/docs/guides/auth)
+- [File storage](https://supabase.com/docs/guides/storage)
+- [Edge functions](https://supabase.com/docs/guides/functions)
+
+We can use these services alongside pgvector to store and query embeddings within Postgres.
+
+## OpenAI Cookbook Examples
+
+Below are guides and resources that walk you through how to use OpenAI embedding models with Supabase Vector.
+
+| Guide                                    | Description                                                |
+| ---------------------------------------- | ---------------------------------------------------------- |
+| [Semantic search](./semantic-search.mdx) | Store, index, and query embedd",0.6897248029708862,2,2
+"How can OpenAI's Realtime API be used to build a multi-lingual, one-way translation workflow using WebSockets?",hybrid,True,0.5,"# How to work with large language models
+
+## How large language models work
+
+[Large language models][Large language models Blog Post] are functions that map text to text. Given an input string of text, a large language model predicts the text that should come next.
+
+The magic of large language models is that by being trained to minimize this prediction error over vast quantities of text, the models end up learning concepts useful for these predictions. For example, they learn:
+
+- how to spell
+- how grammar works
+- how to paraphrase
+- how to answer questions
+- how to hold a conversation
+- how to write in many languages
+- how to code
+- etc.
+
+They do this by “reading” a large amount of existing text and learning how words tend to appear in context with other words, and uses what it has learned to predict the next most likely word that might appear in response to a user request, and each subsequent word after that.
+
+GPT-3 and GPT-4 power [many software products][OpenAI Customer Stories], including productivity apps, education apps, games, and more.
+
+## How to control a large language model
+
+Of all the inputs to a large language model, by far the most influential is the text prompt.
+
+Large language models can be prompted to produce output in a few ways:
+
+- **Instruction**: Tell the model what you want
+- **Completion**: Induce the model to complete the beginning of what you want
+- **Scenario**: Give the model a situation to play out
+- **Demonstration**: Show the model what you want, with either:
+  - A few examples in the prompt
+  - Many hundreds or thousands of examples in a fine-tuning training dataset
+
+An example of each is shown below.
+
+### Instruction prompts
+
+Write your instruction at the top of the prompt (or at the bottom, or both), and the model will do its best to follow the instruction and then stop. Instructions can be detailed, so don't be afraid to write a paragraph explicitly detailing the output you want, just stay aware of how many [tokens](https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them) the model can process.
+",0.5599063038825989,2,2
+"What is the high-level architecture of an application that uses the Realtime API for conversational translation, involving a speaker app and a listener app?",hybrid,True,0.5,"M apps with data.
+- [LLMOps Database](https://www.reddit.com/r/LocalLLaMA/comments/1h4u7au/a_nobs_database_of_how_companies_actually_deploy/): Database of how companies actually deploy LLMs in production.
+- [LMQL](https://lmql.ai): A programming language for LLM interaction with support for typed prompting, control flow, constraints, and tools.
+- [OpenAI Evals](https://github.com/openai/evals): An open-source library for evaluating task performance of language models and prompts.
+- [Outlines](https://github.com/normal-computing/outlines): A Python library that provides a domain-specific language to simplify prompting and constrain generation.
+- [Parea AI](https://www.parea.ai): A platform for debugging, testing, and monitoring LLM apps.
+- [Portkey](https://portkey.ai/): A platform for observability, model management, evals, and security for LLM apps.
+- [Promptify](https://github.com/promptslab/Promptify): A small Python library for using language models to perform NLP tasks.
+- [PromptPerfect](https://promptperfect.jina.ai/prompts): A paid product for testing and improving prompts.
+- [Prompttools](https://github.com/hegelai/prompttools): Open-source Python tools for testing and evaluating models, vector DBs, and prompts.
+- [Scale Spellbook](https://scale.com/spellbook): A paid product for building, comparing, and shipping language model apps.
+- [Semantic Kernel](https://github.com/microsoft/semantic-kernel): A Python/C#/Java library from Microsoft that supports prompt templating, function chaining, vectorized memory, and intelligent planning.
+- [Vellum](https://www.vellum.ai/): A paid AI product development platform to experiment with, evaluate, and deploy advanced LLM apps.
+- [Weights & Biases](https://wandb.ai/site/solutions/llmops): A paid product for tracking model training and prompt engineering experiments.
+- [",0.536563515663147,2,2
+How are language-specific prompts and sessions managed when using the Realtime API for translating speech into multiple languages simultaneously?,hybrid,True,0.5,"# How to work with large language models
+
+## How large language models work
+
+[Large language models][Large language models Blog Post] are functions that map text to text. Given an input string of text, a large language model predicts the text that should come next.
+
+The magic of large language models is that by being trained to minimize this prediction error over vast quantities of text, the models end up learning concepts useful for these predictions. For example, they learn:
+
+- how to spell
+- how grammar works
+- how to paraphrase
+- how to answer questions
+- how to hold a conversation
+- how to write in many languages
+- how to code
+- etc.
+
+They do this by “reading” a large amount of existing text and learning how words tend to appear in context with other words, and uses what it has learned to predict the next most likely word that might appear in response to a user request, and each subsequent word after that.
+
+GPT-3 and GPT-4 power [many software products][OpenAI Customer Stories], including productivity apps, education apps, games, and more.
+
+## How to control a large language model
+
+Of all the inputs to a large language model, by far the most influential is the text prompt.
+
+Large language models can be prompted to produce output in a few ways:
+
+- **Instruction**: Tell the model what you want
+- **Completion**: Induce the model to complete the beginning of what you want
+- **Scenario**: Give the model a situation to play out
+- **Demonstration**: Show the model what you want, with either:
+  - A few examples in the prompt
+  - Many hundreds or thousands of examples in a fine-tuning training dataset
+
+An example of each is shown below.
+
+### Instruction prompts
+
+Write your instruction at the top of the prompt (or at the bottom, or both), and the model will do its best to follow the instruction and then stop. Instructions can be detailed, so don't be afraid to write a paragraph explicitly detailing the output you want, just stay aware of how many [tokens](https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them) the model can process.
+",0.5945252180099487,1,1
+What steps are involved in setting up a Supabase Vector database to store and query OpenAI embeddings for semantic search?,hybrid,True,0.75,"# Supabase Vector Database
+
+[Supabase](https://supabase.com/docs) is an open-source Firebase alternative built on top of [Postgres](https://en.wikipedia.org/wiki/PostgreSQL), a production-grade SQL database.
+
+[Supabase Vector](https://supabase.com/docs/guides/ai) is a vector toolkit built on [pgvector](https://github.com/pgvector/pgvector), a Postgres extension that allows you to store your embeddings inside the same database that holds the rest of your application data. When combined with pgvector's indexing algorithms, vector search remains [fast at large scales](https://supabase.com/blog/increase-performance-pgvector-hnsw).
+
+Supabase adds an ecosystem of services and tools on top of Postgres that makes app development as quick as possible, including:
+
+- [Auto-generated REST APIs](https://supabase.com/docs/guides/api)
+- [Auto-generated GraphQL APIs](https://supabase.com/docs/guides/graphql)
+- [Realtime APIs](https://supabase.com/docs/guides/realtime)
+- [Authentication](https://supabase.com/docs/guides/auth)
+- [File storage](https://supabase.com/docs/guides/storage)
+- [Edge functions](https://supabase.com/docs/guides/functions)
+
+We can use these services alongside pgvector to store and query embeddings within Postgres.
+
+## OpenAI Cookbook Examples
+
+Below are guides and resources that walk you through how to use OpenAI embedding models with Supabase Vector.
+
+| Guide                                    | Description                                                |
+| ---------------------------------------- | ---------------------------------------------------------- |
+| [Semantic search](./semantic-search.mdx) | Store, index, and query embedd",0.7640353143215179,2,2
