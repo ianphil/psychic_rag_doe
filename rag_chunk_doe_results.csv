@@ -1,0 +1,9 @@
+chunk_size,question,score
+100,How do I authenticate with Azure OpenAI?,4
+100,What’s the example for streaming responses?,1
+250,How do I authenticate with Azure OpenAI?,4
+250,What’s the example for streaming responses?,1
+500,How do I authenticate with Azure OpenAI?,3
+500,What’s the example for streaming responses?,1
+1000,How do I authenticate with Azure OpenAI?,3
+1000,What’s the example for streaming responses?,1
