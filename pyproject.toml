@@ -1,0 +1,15 @@
+[project]
+name = "psychic-rag-doe"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "jupyterlab>=4.4.2",
+    "matplotlib>=3.10.3",
+    "openai>=1.78.0",
+    "pandas>=2.2.3",
+    "python-dotenv>=1.1.0",
+    "scikit-learn>=1.6.1",
+    "transformers>=4.51.3",
+]
